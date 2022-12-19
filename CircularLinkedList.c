@@ -407,6 +407,32 @@ CircularLinkedList* mergeTwoLists(CircularLinkedList *list1, CircularLinkedList 
 }
 
 /**
+ * @brief Sort the linked list
+ * 
+ * @param list
+ */
+void sortLinkedList(CircularLinkedList *list)
+{
+    if (list->head == NULL) {
+        printf("List is empty!\n");
+        return;
+    }
+    Node* current = list->head;
+    while (current != NULL) {
+        Node* next = current->next;
+        while (next != NULL) {
+            if (current->data > next->data) {
+                int temp = current->data;
+                current->data = next->data;
+                next->data = temp;
+            }
+            next = next->next;
+        }
+        current = current->next;
+    }
+}
+
+/**
  * @brief Merge two sorted lists
  * 
  * @param list1
@@ -423,7 +449,7 @@ CircularLinkedList* mergeTwoSortedLists(CircularLinkedList *list1, CircularLinke
     }
     Node *temp1 = list1->head;
     Node *temp2 = list2->head;
-    CircularLinkedList *mergedList = createNewList();
+    CircularLinkedList *mergedList = createNewCircularLinkedList();
     while (temp1 != list1->tail && temp2 != list2->tail) {
         if (temp1->data < temp2->data) {
             insertAtEnd(mergedList, temp1->data);
@@ -465,7 +491,7 @@ void freeList(CircularLinkedList *list)
 int main(int argc, char** argv)
 {
     // Create a new list
-    CircularLinkedList *list = createNewList();
+    CircularLinkedList *list = createNewCircularLinkedList();
 
     // Insert some nodes
     insertAtBeginning(list, 1);
