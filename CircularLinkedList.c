@@ -384,6 +384,67 @@ Node* findMinimumNode(CircularLinkedList *list)
 }
 
 /**
+ * @brief Merge two linked-lists
+ * 
+ * @param list1
+ * @param list2
+ * @return CircularLinkedList
+ * 
+ */
+CircularLinkedList* mergeTwoLists(CircularLinkedList *list1, CircularLinkedList *list2)
+{
+    if (list1->head == NULL) {
+        return list2;
+    }
+    if (list2->head == NULL) {
+        return list1;
+    }
+    list1->tail->next = list2->head;
+    list2->tail->next = list1->head;
+    list1->tail = list2->tail;
+    list1->size += list2->size;
+    return list1;
+}
+
+/**
+ * @brief Merge two sorted lists
+ * 
+ * @param list1
+ * @param list2
+ * @return CircularLinkedList* 
+ */
+CircularLinkedList* mergeTwoSortedLists(CircularLinkedList *list1, CircularLinkedList *list2)
+{
+    if (list1->head == NULL) {
+        return list2;
+    }
+    if (list2->head == NULL) {
+        return list1;
+    }
+    Node *temp1 = list1->head;
+    Node *temp2 = list2->head;
+    CircularLinkedList *mergedList = createNewList();
+    while (temp1 != list1->tail && temp2 != list2->tail) {
+        if (temp1->data < temp2->data) {
+            insertAtEnd(mergedList, temp1->data);
+            temp1 = temp1->next;
+        } else {
+            insertAtEnd(mergedList, temp2->data);
+            temp2 = temp2->next;
+        }
+    }
+    while (temp1 != list1->tail) {
+        insertAtEnd(mergedList, temp1->data);
+        temp1 = temp1->next;
+    }
+    while (temp2 != list2->tail) {
+        insertAtEnd(mergedList, temp2->data);
+        temp2 = temp2->next;
+    }
+    return mergedList;
+}
+
+/**
  * @brief Free the list
  * 
  * @param list 
