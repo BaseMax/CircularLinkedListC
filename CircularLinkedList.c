@@ -197,6 +197,137 @@ void deleteNodeAtPosition(CircularLinkedList *list, int position)
 }
 
 /**
+ * @brief Search for a node in the list
+ * 
+ * @param list 
+ * @param data 
+ * @return true 
+ * @return false 
+ */
+bool search(CircularLinkedList *list, int data)
+{
+    Node *temp = list->head;
+    do {
+        if (temp->data == data) {
+            return true;
+        }
+        temp = temp->next;
+    } while (temp != list->head);
+    return false;
+}
+
+/**
+ * @brief Print the list
+ * 
+ * @param list 
+ */
+void printList(CircularLinkedList *list)
+{
+    if (list->head == NULL) {
+        printf("List is empty!\n");
+        return;
+    }
+    Node *temp = list->head;
+    do {
+        printf("%d ", temp->data);
+        temp = temp->next;
+    } while (temp != list->head);
+    printf("\n");
+}
+
+/**
+ * @brief Print the list in reverse order
+ * 
+ * @param list 
+ */
+void printListReverse(CircularLinkedList *list)
+{
+    if (list->head == NULL) {
+        printf("List is empty!\n");
+        return;
+    }
+    Node *temp = list->tail;
+    do {
+        printf("%d ", temp->data);
+        temp = temp->next;
+    } while (temp != list->tail);
+    printf("\n");
+}
+
+/**
+ * @brief Reverse the list
+ * 
+ * @param list 
+ */
+void reverseList(CircularLinkedList *list)
+{
+    if (list->head == NULL) {
+        printf("List is empty!\n");
+        return;
+    }
+    Node *current = list->head;
+    Node *prev = NULL;
+    Node *next = NULL;
+    do {
+        next = current->next;
+        current->next = prev;
+        prev = current;
+        current = next;
+    } while (current != list->head);
+    list->tail = list->head;
+    list->head = prev;
+    list->tail->next = list->head;
+}
+
+/**
+ * @brief Reverse the list recursively
+ * 
+ * @param node
+ */
+void reverseListRecursive(Node *node)
+{
+    if (node->next == NULL) {
+        return;
+    }
+    reverseListRecursive(node->next);
+    node->next->next = node;
+    node->next = NULL;
+}
+
+/**
+ * @brief Delete the list
+ * 
+ * @param list 
+ */
+void deleteList(CircularLinkedList *list)
+{
+    if (list->head == NULL) {
+        printf("List is empty!\n");
+        return;
+    }
+    Node *temp = list->head;
+    do {
+        Node *toDelete = temp;
+        temp = temp->next;
+        free(toDelete);
+    } while (temp != list->head);
+    list->head = NULL;
+    list->tail = NULL;
+    list->size = 0;
+}
+
+/**
+ * @brief Free the list
+ * 
+ * @param list 
+ */
+void freeList(CircularLinkedList *list)
+{
+    deleteList(list);
+    free(list);
+}
+
+/**
  * @brief Main entry point
  * 
  * @param argc 
