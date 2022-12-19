@@ -317,6 +317,73 @@ void deleteList(CircularLinkedList *list)
 }
 
 /**
+ * @brief Find the middle node of the list
+ * 
+ * @param list
+ * @return Node* 
+ */
+Node* findMiddleNode(CircularLinkedList *list)
+{
+    if (list->head == NULL) {
+        printf("List is empty!\n");
+        return NULL;
+    }
+    Node *slow = list->head;
+    Node *fast = list->head;
+    while (fast->next != list->head && fast->next->next != list->head) {
+        slow = slow->next;
+        fast = fast->next->next;
+    }
+    return slow;
+}
+
+/**
+ * @brief Find the maximum node of the list
+ * 
+ * @param list
+ * @return Node* 
+ */
+Node* findMaximumNode(CircularLinkedList *list)
+{
+    if (list->head == NULL) {
+        printf("List is empty!\n");
+        return NULL;
+    }
+    Node *max = list->head;
+    Node *temp = list->head->next;
+    do {
+        if (temp->data > max->data) {
+            max = temp;
+        }
+        temp = temp->next;
+    } while (temp != list->head);
+    return max;
+}
+
+/**
+ * @brief Find the minimum node of the list
+ * 
+ * @param list
+ * @return Node* 
+ */
+Node* findMinimumNode(CircularLinkedList *list)
+{
+    if (list->head == NULL) {
+        printf("List is empty!\n");
+        return NULL;
+    }
+    Node *min = list->head;
+    Node *temp = list->head->next;
+    do {
+        if (temp->data < min->data) {
+            min = temp;
+        }
+        temp = temp->next;
+    } while (temp != list->head);
+    return min;
+}
+
+/**
  * @brief Free the list
  * 
  * @param list 
