@@ -271,15 +271,29 @@ void reverseList(CircularLinkedList *list)
  * 
  * @param node
  */
-void reverseListRecursive(Node *node)
+void reverseListRecursive(CircularLinkedList *list)
+{
+    if (list->head == NULL) {
+        printf("List is empty!\n");
+        return;
+    }
+    reverseListRecursiveHelper(list->head);
+    Node *temp = list->head;
+    list->head = list->tail;
+    list->tail = temp;
+    list->tail->next = list->head;
+}
+
+void reverseListRecursiveHelper(Node *node)
 {
     if (node->next == NULL) {
         return;
     }
-    reverseListRecursive(node->next);
+    reverseListRecursiveHelper(node->next);
     node->next->next = node;
     node->next = NULL;
 }
+
 
 /**
  * @brief Delete the list

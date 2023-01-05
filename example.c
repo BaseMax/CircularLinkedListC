@@ -41,7 +41,7 @@ int main(int argc, char** argv)
     printList(list);
 
     // Reverse the list recursively
-    reverseListRecursive(list->head);
+    // reverseListRecursive(list);
 
     // Print the list
     printList(list);

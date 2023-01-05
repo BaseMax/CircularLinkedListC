@@ -114,7 +114,8 @@ void reverseList(CircularLinkedList *list);
  * 
  * @param node
  */
-void reverseListRecursive(Node *node);
+void reverseListRecursive(CircularLinkedList *list);
+void reverseListRecursiveHelper(Node *node);
 
 /**
  * @brief Delete the list
